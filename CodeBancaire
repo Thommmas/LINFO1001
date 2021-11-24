@@ -1,9 +1,11 @@
+pwd = "error"
+'''
 def encode(pwd, plain_text):
 
 def decode(pwd, cipher_text):
 
 def hashing(pwd):
-
+'''
 def user_bank_code():
     f = open("bank_code.txt", "w+")
 
@@ -37,6 +39,16 @@ def create_code_secret():
     f.close()
 
 def get_pwd():
+    f = open("code_secret.txt", "r")
+
+    if pwd != f.read():
+        newpwd =  f.read()
+    f.close()
+    return newpwd
+
+def pwd_to_newpwd():
+    pwd = get_pwd()
+    return pwd
 
 if __name__ == "__main__":
-    user_bank_code()
+    print(pwd_to_newpwd())
