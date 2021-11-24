@@ -1,5 +1,5 @@
 from sense_hat import SenseHat
-from time import sleep: 
+from time import sleep
 
 s = SenseHat()
 s.low_light = True
@@ -8,20 +8,27 @@ sense = SenseHat()
 
 orientation = sense.get_orientation_degrees()    ## Récupère l'orientation du Raspberry 
 deg = "p: {pitch}, r: {roll}, y: {yaw}".format(**orientation)
+#event = sense.stick.wait_for_event()  ## Détecte un évênement sur le joystick
 
-event = sense.stick.wait_for_event()
-print("The joystick was {} {}".format(event.action, event.direction))
-sleep(0.1)
-event = sense.stick.wait_for_event()
-print("The joystick was {} {}".format(event.action, event.direction))
 
+
+def start():   ## Fonction pour démarrer le Raspberry Pi
+  sense.rotation = 270    ## Pour afficher le message à l'endroit
+  sense.show_message("Welcome to your Raspberry Pi!", text_colour=[255, 0, 0], back_colour=[0, 255, 0], scroll_speed=0.08)
+  sense.show_message("Choose a function:", text_colour=[255, 0, 0], back_colour=[0, 0, 255], scroll_speed=0.08)
+    
+bool = True
 while True : 
+  orientation = sense.get_orientation_degrees()    ## Récupère l'orientation du Raspberry 
   pitch = float("{pitch}".format(**orientation))   ## Assigne la valeur du pitch récuperée à "pitch"
-  print(pitch)           ## Pour vérifier le pitch
+  #print(pitch) ## Pour vérifier le pitch    
+  if pitch > 100  or pitch < 75 :    ## Raspberry s'allume si on pivote assez le Raspberry 
+     start()
   
-  if pitch > 100  or pitch < 75  :    ## Si on ne pivote pas assez le Raspberry, il ne s'allume pas 
-    sense.rotation = 270    ## Pour afficher le message à l'endroit
-    sense.show_message("Welcome to your Raspberry Pi!", text_colour=[255, 0, 0], back_colour=[0, 255, 0], scroll_speed=0.08)
-    sense.show_message("Choose a function to execute:", text_colour=[255, 0, 0], back_colour=[0, 0, 255], scroll_speed=0.08)
-  
-  
+  else:                             ## Raspberry s'allume si on bouge le joystick 
+    event = sense.stick.wait_for_event()       ## Récupère l'évênement sur le joysticik. Ne fait rien si il n'y en a pas
+    if event.action =="pressed":               
+      start()
+      
+      
+  bool = False
