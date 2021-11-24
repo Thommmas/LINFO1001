@@ -1,0 +1,42 @@
+def encode(pwd, plain_text):
+
+def decode(pwd, cipher_text):
+
+def hashing(pwd):
+
+def user_bank_code():
+    f = open("bank_code.txt", "w+")
+
+    print("insert bank code: ")
+    f.write(str(input()))
+
+    f.close()
+
+def code_secret():
+    f = open("code_secret.txt", "r+")
+
+    if f.read() == "":
+        f.write(str(input()))
+
+    f.close()
+
+def change_code_secret():
+    f = open("code_secret.txt", "w")
+
+    print("insert your new secret code: ")
+    f.write(str(input()))
+
+    f.close()
+
+def create_code_secret():
+    f = open("code_secret.txt", "w")
+
+    print("insert your secret code: ")
+    f.write(str(input()))
+
+    f.close()
+
+def get_pwd():
+
+if __name__ == "__main__":
+    user_bank_code()
