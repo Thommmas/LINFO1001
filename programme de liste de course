@@ -1,0 +1,13 @@
+
+liste_de_course=[["produits letieres:","lait fermenté","crème","beurre","yaourts","fromages","caséine","babeurre"],
+["Produits d’hygiène:","Savons","Shampooings","brosses a dent","dentifrice"],
+["produits frais:","fruits","legumes","poisson","viande","frommage"],
+["menage:","anticalcaire","eponges","papier menage", "prd vitres","prd vaisselle machi"],
+["patisserie:","fruits secs","farines","chocolat","sucres"]]
+
+
+for i in range(len(liste_de_course)):
+    print(liste_de_course[i][0].upper())
+    for j in range(1,len(liste_de_course[i])):
+        print(liste_de_course[i][j])
+
