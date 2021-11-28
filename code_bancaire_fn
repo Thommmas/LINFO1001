@@ -1,0 +1,50 @@
+import os
+from encryption_local import *
+from code_secret_fn import *
+
+pwd = get_pwd()
+
+def get_code():
+    f = open("bank_code.txt", "r")
+    read = f.read()
+    return read
+
+def get_code_decoded():
+    f = open("bank_code.txt", "r")
+    read = f.read()
+    return decode(pwd, read)
+
+def get_code_encoded():
+    f = open("bank_code.txt", "r")
+    read = f.read()
+    return encode(pwd, read)
+
+def change_bank_code():
+    f = open("bank_code.txt", "w")
+    user_input = input()
+    f.write(str(user_input))
+
+def create_bank_code():
+    f = open("bank_code.txt", "w")
+    print("insert bank code: ")
+    change_bank_code()
+    temp = get_code_encoded()
+    f.write(temp)
+
+def show_decoded():
+    tempo = get_code_decoded()
+    print(tempo)
+
+def user_bank_code():
+    f = open("bank_code.txt", "a+")
+    read = f.read()
+
+    if os.stat("bank_code.txt").st_size == 0:
+        create_bank_code()
+    else:
+        show_decoded()
+
+    f.close()
+
+
+
