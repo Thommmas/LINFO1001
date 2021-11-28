@@ -1,0 +1,12 @@
+from encryption_local import *
+from code_bancaire_fn import *
+
+pwd = get_pwd()
+code = get_code()
+encoded_text = encode(pwd, code)
+decoded_text = decode(pwd, encoded_text)
+
+print(code)
+print(pwd)
+print(encoded_text)
+print(decoded_text)
