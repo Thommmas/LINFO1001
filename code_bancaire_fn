@@ -33,7 +33,8 @@ def create_bank_code():
 
 def show_decoded():
     tempo = get_code_decoded()
-    print(tempo)
+    #print(tempo)
+    return tempo
 
 def user_bank_code():
     f = open("bank_code.txt", "a+")
