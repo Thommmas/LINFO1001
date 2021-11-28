@@ -37,7 +37,6 @@ def show_decoded():
 
 def user_bank_code():
     f = open("bank_code.txt", "a+")
-    read = f.read()
 
     if os.stat("bank_code.txt").st_size == 0:
         create_bank_code()
