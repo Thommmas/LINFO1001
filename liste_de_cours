@@ -1,0 +1,32 @@
+produits_letieres=["lait fermenté","crème","beurre","yaourts","fromages","babeurre"]
+viande=[]
+charcuterie =[]
+fruit=[]
+legume=[]
+fromage= ["emmental", "roquefort"]
+magasin=[produits_letieres, viande, charcuterie, fruit, legume,fromage,]
+
+
+#ajouter un produit a la liste 
+produit = input("Quel produit voulez_vous ajouter ? ")
+name = input("Quel est le nom de votre element ? ")
+if produit not in magasin:
+    type_produit = input("Quelle type de produit ? ")
+    eval(type_produit)
+    list(type_produit)
+    print(type_produit)
+    if type_produit in magasin:
+        type_produit.append(produit)
+# Tes données
+magasin=[produits_letieres, viande, charcuterie, fruit, legume,fromage,]
+# Enregistre ta liste dans ton fichier.txt
+with open('fichier.txt', 'w') as f:
+    for item in magasin:
+        f.write(f'{item}\n')
+ 
+# Récupère ta liste
+with open('fichier.txt', 'r') as f:
+    liste = f.read().splitlines()
+ 
+print(liste[0])    
+    
