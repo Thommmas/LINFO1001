@@ -4,43 +4,39 @@ from code_secret_fn import *
 
 pwd = get_pwd()
 
-def get_code():
-    f = open("bank_code.txt", "r")
-    read = f.read()
-    return read
-
+# cette fonction renvoie la version décrypte du code bancaire
 def get_code_decoded():
     f = open("bank_code.txt", "r")
     read = f.read()
     return decode(pwd, read)
 
-def get_code_encoded():
-    f = open("bank_code.txt", "r")
-    read = f.read()
-    return encode(pwd, read)
-
+# cette fonction permet à l'utilisateur de modifier son code dans le fichier,
+# tout en cryptant le code en fonction de son code secret
+# pour des raisons de sécurité
 def change_bank_code():
     f = open("bank_code.txt", "w")
-    user_input = input()
-    f.write(str(user_input))
-
-def create_bank_code():
-    f = open("bank_code.txt", "w")
     print("insert bank code: ")
-    change_bank_code()
-    temp = get_code_encoded()
+    user_input = input()
+    temp = encode(pwd, user_input)
     f.write(temp)
 
+# cette fonction renvoie la version décryptée du fichier
+# en fonction du code secret
 def show_decoded():
-    tempo = get_code_decoded()
-    #print(tempo)
-    return tempo
+    temp = get_code_decoded()
+    print(temp)
+    return temp
 
+# cette fonction vérifie si le fichier est vide pour qu'un
+# code soit créé, et si un code existe déjà,
+# la fonction retourne une version décryptée du fichier
+# et si le fichier bank_code.txt n'existe pas,
+# le code créera automatiquement un fichier txt avec le nom bank_code
 def user_bank_code():
     f = open("bank_code.txt", "a+")
 
     if os.stat("bank_code.txt").st_size == 0:
-        create_bank_code()
+        change_bank_code()
     else:
         show_decoded()
 
