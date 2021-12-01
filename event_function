@@ -7,12 +7,13 @@ s.low_light = True
 
 sense = SenseHat()
 
-dic_for_months = {["January": "janvier"], ["February" : "février"], ["March" : "mars"], ["April" : "avril"], ["May" : "mai"], ["June" : "juin"], ["July" : "juillet"], ["August" : "août"], ["September" : "septembre"], ["October" : "octobre"], ["November" : "novembre"], ["December" : "décembre"]}
-
+dic_for_months = {"janvier": "January", "février" : "February", "mars" : "March", "avril" : "April", "mai" : "May", "juin" : "June", "juillet" : "July", "août" : "August", "septembre" : "September", "octobre" : "October", "novembre" : "November", "décembre" : "December"}
+dic_for_presets = {"médicament": , "rdv 1", "rdv 2", ...}
 
 
 name_event = input("Donnez le nom de votre rappel/évênement : ")  ##configurer rappel
-date_event = input("Donner la date de votre rappel (Avec une majuscule pour le mois : ") ##configurer rappel 
+date_event = input("Donner la date de votre rappel : ") ##configurer rappel 
+                                  ##configurer rappel
 time_event = input("Donner l'heure de votre rappel : ") ##configurer rappel 
                                                     ##(à mettre en dehors de boucle!!!)
 
@@ -22,13 +23,16 @@ t = time.localtime()                      ##gets the local time
 current_time = time.strftime("%H:%M", t)  ##formats the local time
 current_date_day = time.strftime("%-d")
 current_date_month = time.strftime("%B")
-for month in range(len(dic_for_months)): 
-  if current_date_month == dic_for_months[month][0]: 
-    print(dic_for_months[month][1])
+
+day = date_event.split(" ")[0]
+month = date_event.split(" ")[1]
+
+
+date_event_monthen = dic_for_months[month]
 
 
 
-if time_event == current_time and date_event[1] == current_date_month and date_event[0] == current_date_day:
+if time_event == current_time and date_event_monthen == current_date_month and month == current_date_day:
 
   print("It's time for " + name_event + "!")
   
