@@ -8,7 +8,7 @@ pwd = get_pwd()
 def get_code_decoded():
     f = open("bank_code.txt", "r")
     read = f.read()
-    return decode(pwd, read)
+    return decode_crypto(pwd, read)
 
 # cette fonction permet à l'utilisateur de modifier son code dans le fichier,
 # tout en cryptant le code en fonction de son code secret
@@ -17,7 +17,7 @@ def change_bank_code():
     f = open("bank_code.txt", "w")
     print("insert bank code: ")
     user_input = input()
-    temp = encode(pwd, user_input)
+    temp = encode_crypto(pwd, user_input)
     f.write(temp)
 
 # cette fonction renvoie la version décryptée du fichier
