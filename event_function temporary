@@ -1,0 +1,66 @@
+from sense_hat import SenseHat
+import time
+
+
+s = SenseHat()
+s.low_light = True
+
+sense = SenseHat()
+
+dic_for_months = {"janvier": "January", "février" : "February", "mars" : "March", "avril" : "April", "mai" : "May", "juin" : "June", "juillet" : "July", "août" : "August", "septembre" : "September", "octobre" : "October", "novembre" : "November", "décembre" : "December"}
+liste_for_presets= ["médicament", "rdv 1", "rdv 2", "vert", "bleu", "rouge", "jaune" ]
+day_in_months = {"1":"1", "2":"2", "3":"3" , "4":"4", "5":"5", "6":"6"}
+
+name_event = input("Donnez le nom de votre rappel/évênement : ")  ##configurer rappel
+
+if name_event in liste_for_presets: 
+  
+    
+  date_event = input("Donner la date de votre rappel : ") ##configurer rappel 
+  
+  day = date_event.split(" ")[0]
+  month = date_event.split(" ")[1]##configurer rappel
+  
+
+  while True:   
+    try:
+      day != day_in_months[day]: 
+          print("Veuillez insérer une date correcte svp")
+        else:
+          break
+    except:
+      print("f")
+    
+
+  time_event = input("Donner l'heure de votre rappel : ") ##configurer rappel 
+                                                    ##(à mettre en dehors de boucle!!!)
+    
+    
+  print("Votre rappel est : ", name_event, date_event,  time_event)
+
+  while True :   
+    t = time.localtime()                      ##gets the local time 
+    current_time = time.strftime("%H:%M", t)  ##formats the local time
+    current_date_day = time.strftime("%-d")
+    current_date_month = time.strftime("%B")
+      
+    #day = date_event.split(" ")[0]
+    #month = date_event.split(" ")[1]
+      
+      
+    date_event_monthen = dic_for_months[month]
+      
+      
+      
+    if time_event == current_time and date_event_monthen == current_date_month and day == current_date_day:
+      
+      print("It's time for " + name_event + "!")
+      break
+        
+    else: 
+      pass
+        
+    
+    
+else : 
+  print("Votre rappel ne figure pas dans la liste disponible. Veuillez introduire un nom correct svp")
