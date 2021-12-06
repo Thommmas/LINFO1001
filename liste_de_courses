@@ -1,0 +1,10 @@
+contenu_magasin = {
+"baguette":[],
+"viande":[],
+"charcuterie":[],
+"fruit":[],
+"legume":[],
+"boisson_chaude":[],
+"fromage":[]}
+ 
+contenu_magasin[input("Dans quelle categorie souhaitez-vous ranger cet element ?\n> ")].append(input("Quel est le nom de votre element ?\n> "))
