@@ -33,12 +33,29 @@ def show_decoded():
 # et si le fichier bank_code.txt n'existe pas,
 # le code créera automatiquement un fichier txt avec le nom bank_code
 def user_bank_code():
-    f = open("bank_code.txt", "a+")
-
+    f = open("bank_code.txt", "r")
+    read = f.read()
     if os.stat("bank_code.txt").st_size == 0:
         change_bank_code()
     else:
-        show_decoded()
+        pass
+    valid_user_input = False
+    user_input = input('what is your secret code?')
+    while valid_user_input == False:
+        c = open("code_secret.txt", "r")
+        read_c = c.read()
+        if hashing(user_input) == read_c:
+            decoded = decode_crypto(read_c, read)
+            print('your code is', decoded)
+            valid_user_input = True
+            c.close()
+        elif user_input.lower() == 'exit':
+            print('exited')
+            valid_user_input = True
+        else:
+            print('that is not your secret code')
+            user_input = input('Try again')
+
 
     f.close()
 
