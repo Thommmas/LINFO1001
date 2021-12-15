@@ -1,90 +1,134 @@
 from sense_hat import SenseHat
 import time
 
-
 s = SenseHat()
 s.low_light = True
-
+  
 sense = SenseHat()
+
 
 dic_for_months = {"janvier": "January", "février" : "February", "mars" : "March", "avril" : "April", "mai" : "May", "juin" : "June", "juillet" : "July", "août" : "August", "septembre" : "September", "octobre" : "October", "novembre" : "November", "décembre" : "December"}
 liste_for_presets= ["médicament", "rdv 1", "rdv 2", "vert", "bleu", "rouge", "jaune" ]
 day_in_months = {"1":1, "2":2, "3":3,"4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9,"10": 10,
-"11": 11, "12": 12, "13": 13, "14": 14, "15": 15, "16": 16, "17": 17, "18": 18, "19": 19, "20": 20,
-"21": 21, "22": 22, "23": 23, "24": 24, "25": 25, "26": 26, "27": 27, "28": 28, "29": 29, "30": 30,
-"31" : 31}
-hours_in_time = {"0": 0,"1": 1,"2": 2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,
-"12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,
-"21":21,"22":22,"23":23,"24":24}
-minutes_in_time = {"0": 0,"1": 1,"2": 2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,
-"12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,
-"21":21,"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":20,"31":31,"32":32,
-"33":33,"34":34,"35":35,"36":36,"37":37,"38":38,"39":39,
-"40":40,"41":41,"42":42,"43":43,"44":44,"45":45,"46":46,"47":47,
-"48":48,"49":49,"50":50,"51":51,"52":52,"53":53,"54":54,"55":55,
-"56":56,"57":57,"58":58,"59":59
-}
+  "11": 11, "12": 12, "13": 13, "14": 14, "15": 15, "16": 16, "17": 17, "18": 18, "19": 19, "20": 20,
+  "21": 21, "22": 22, "23": 23, "24": 24, "25": 25, "26": 26, "27": 27, "28": 28, "29": 29, "30": 30,
+  "31" : 31}
+hours_in_time = {"00": 0,"01": 1,"02": 2,"03": 3,"04": 4,"05": 5,"06": 6,"07": 7,"08": 8,"09": 9,"10": 10,"11": 11,
+  "12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,
+  "21":21,"22":22,"23":23,"24":24}
+minutes_in_time = {"00": 0, "01":1, "02": 2, "03":3, "04":4, "05":5, "06":6, "07":7, "08":8, "09":9, "10":10, "11":11,
+  "12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,
+  "21":21,"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":20,"31":31,"32":32,
+  "33":33,"34":34,"35":35,"36":36,"37":37,"38":38,"39":39,
+  "40":40,"41":41,"42":42,"43":43,"44":44,"45":45,"46":46,"47":47,
+  "48":48,"49":49,"50":50,"51":51,"52":52,"53":53,"54":54,"55":55,
+  "56":56,"57":57,"58":58,"59":59
+  }
+  
+name_event = ""
+  
+date_event = ""
+
+time_event = ""
+
+month = ""
+
+day = ""
+
+hours_input = ""
+
+minutes_input = ""
 
 
 
-name_event = input("Donnez le nom de votre rappel/évênement : ")  ##configurer rappel
-
-if name_event in liste_for_presets: 
-    
+def name_event(): 
+  global name_event
+  name_event = input("Donnez le nom de votre rappel/évênement : ")  ##configurer rappel
+  return name_event
+  
+def date_event(): 
+  global date_event
+  global month
+  global day
   date_event = input("Donner la date de votre rappel : ") ##configurer rappel 
-  day = date_event.split(" ")[0]
-  month = date_event.split(" ")[1]##configurer rappel
   valid_input_date = False
-  valid_input_time = False
+  
+  day = date_event.split(" ")[0]
+  month = date_event.split(" ")[1]##configurer rappel 
   
   while valid_input_date == False:
     if day_in_months.has_key(day) and dic_for_months.has_key(month):
       valid_input_date = True
     else:
-      print('try again')
-      date_event = input('date')
+      print('Insérez une date correcte')
+      date_event = input("Donner la date de votre rappel : ") ##configurer rappel
       day = date_event.split(" ")[0]
       month = date_event.split(" ")[1]
-
+  return date_event
+  
+def time_event():
+  global time_event
+  global hours_input
+  global minutes_input
   time_event = input("Donner l'heure de votre rappel : ") ##configurer rappel 
-                                                    ##(à mettre en dehors de boucle!!!)
   hours_input = time_event.split(":")[0]
   minutes_input = time_event.split(":")[1]##configurer heure
   
+  valid_input_time = False
+    
   while valid_input_time == False:
     if hours_in_time.has_key(hours_input) and minutes_in_time.has_key(minutes_input):
-      valid_input_time = True
+       valid_input_time = True
     else:
-      print('try again')
-      time_event = input("Donner l'heure de votre rappel : ") 
+      print('Insérez une heure correcte')
+      time_event = input("Donner l'heure de votre rappel : ") ##configurer rappel
       hours_input = time_event.split(":")[0]
       minutes_input = time_event.split(":")[1]
+  return time_event
+  
 
-  print("Votre rappel est : ", name_event, date_event,  time_event)
-
-  while True :   
-    t = time.localtime()                      ##gets the local time 
-    current_time = time.strftime("%H:%M", t)  ##formats the local time
-    current_date_day = time.strftime("%-d")
-    current_date_month = time.strftime("%B")
-      
-    #day = date_event.split(" ")[0]
-    #month = date_event.split(" ")[1]
-      
-      
-    date_event_monthen = dic_for_months[month]
-      
-      
-      
-    if time_event == current_time and date_event_monthen == current_date_month and day == current_date_day:
-      
-      print("It's time for " + name_event + "!")
-      break
-        
-    else: 
-      pass
-        
+def event_function() :
+  
+  
+  name_event()
+  
+  if name_event in liste_for_presets: 
+    global date_event 
+    global time_event
+    date_event()
     
     
-else : 
-  print("Votre rappel ne figure pas dans la liste disponible. Veuillez introduire un nom correct svp")
+  
+    time_event() 
+                                                     
+    
+    print("Votre rappel est : ", name_event, date_event,  time_event)
+  
+    while True :   
+      t = time.localtime()                      ##gets the local time 
+      current_time = time.strftime("%H:%M", t)  ##formats the local time
+      current_date_day = time.strftime("%-d")
+      current_date_month = time.strftime("%B")
+        
+      #day = date_event.split(" ")[0]
+      #month = date_event.split(" ")[1]
+        
+        
+      date_event_monthen = dic_for_months[month]
+        
+        
+        
+      if time_event == current_time and date_event_monthen == current_date_month and day == current_date_day:
+        
+        print("It's time for " + name_event + "!")
+        break
+          
+      else: 
+        pass
+          
+      
+      
+  else : 
+    print("Votre rappel ne figure pas dans la liste disponible. Veuillez introduire un nom correct svp")
+
+event_function()
